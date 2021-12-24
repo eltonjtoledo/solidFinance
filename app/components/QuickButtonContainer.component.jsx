@@ -1,31 +1,33 @@
-import React from "react";
-import { StyleSheet, Text, View, Animated } from "react-native";
-import { Feather } from '@expo/vector-icons';
+import React, { useState } from "react";
+import { StyleSheet, Text, View, Animated, ScrollView, TouchableOpacity } from "react-native";
 import { colorsDefault, viewport } from "../globals/styleGlobal";
 import QuickButton from "./QuickButton.component";
-import { FlatList } from "react-native";
-import { PanGestureHandler, state } from "react-native-gesture-handler";
+import Icon from 'react-native-vector-icons/Feather';
 
-export default function QuickButtonCotainer() {
+const QuickButtonCotainer = ()=> {
+    const [QuickButtonList, setQuickButtonList] = useState([{name: 'Payments', icon: 'payments', active: true},
+    {name: 'Request Payments', icon: 'save-alt', active: false},
+    {name: 'Teste', icon: 'home', active: false}]);
+
+    function activeQuickButtons(i){
+        const btns = QuickButtonList.map(btn => {
+            btn.active = false;
+            return btn;
+        });
+        btns[i].active = true;
+        setQuickButtonList([...btns]);
+    }
 
     return (
         <View style={style.containerQuickButtons}>
-            <View style={{
-            flex: 1,
-            marginRight: 5,
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "stretch", overflow: "hidden"}}>
-                <QuickButton title="add" selected={true} />
-                <QuickButton selected={false} />
-            </View>
-            <View style={style.quickButtonMore}>
-                <Feather name="more-vertical" color="grey" size={30} />
-            </View>
-
-
-
-
+            <ScrollView style={{flex: 1, marginRight: 5, overflow: "hidden"}} horizontal={true} bounces={true}>
+            {QuickButtonList.map((item, i)=>{
+                return <QuickButton key={i} onPress={() => activeQuickButtons(i)} title={`${item.name}`} selected={item.active} iconName={item.icon} />
+            })}
+            </ScrollView>
+            <TouchableOpacity style={style.quickButtonMore}>
+                <Icon name="more-vertical" color="grey" size={30} />
+            </TouchableOpacity>
         </View>
     )
 }
@@ -52,3 +54,5 @@ const style = StyleSheet.create({
         marginLeft: -10
     }
 })
+
+export default QuickButtonCotainer;

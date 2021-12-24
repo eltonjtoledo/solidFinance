@@ -15,7 +15,6 @@ export default function Login({ navigation }) {
             setKeyboardShow(false);
         });
       }, []);
-
     return (
         <View style={{ backgroundColor: colorsDefault.primary, flex: 1 }}>
             <View style={{ flex: 1, margin: 1 }}></View>
@@ -29,7 +28,7 @@ export default function Login({ navigation }) {
                 }} source={require("../../assets/logo.png")} />
                 <TextInput returnKeyType={"next"} style={styleGlobal.inputText} name="Username" placeholder="Enter your name or E-mail"/>    
                 <TextInput style={styleGlobal.inputText} name="password" placeholder="Digite o usuário"/>    
-                <TouchableOpacity style={styleGlobal.buttonDefault}>
+                <TouchableOpacity style={styleGlobal.buttonDefault} onPress={()=>{navigation.navigate('Home')}}>
                     <Text style={styleGlobal.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>

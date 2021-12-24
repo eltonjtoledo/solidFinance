@@ -5,14 +5,13 @@ import { StyleSheet, Text, View } from "react-native";
 import { Icon } from 'react-native-elements';
 import { colorsDefault, viewport } from "../globals/styleGlobal";
 
-export default function QuickButton({ title, selected }) {
+export default function QuickButton({ title, selected, iconName, onPress}) {
     const style = StyleSheet.create({
         QuickButton: {
             margin: 5,
-            width: viewport.width / 4.2,
+            width: viewport.width / 3,
             borderRadius: 13,
             backgroundColor: selected ? colorsDefault.secundary : "#fff",
-            maxWidth: viewport.width / 4.2,
             justifyContent: "center",
             flexDirection: "column",
             alignItems: "center"
@@ -25,11 +24,9 @@ export default function QuickButton({ title, selected }) {
     });
 
     return (
-        <TouchableOpacity style={style.QuickButton}>
-            <View>
-            <Icon type="MaterialIcons" name="playlist-add" color={!selected ? colorsDefault.secundary : "#fff"} size={30} />
+        <TouchableOpacity style={style.QuickButton} onPress={onPress}>
+            <Icon type="MaterialIcons" name={iconName} color={!selected ? colorsDefault.secundary : "#fff"} size={30} />
             <Text style={style.QuickButton_title}>{title || 'teste'}</Text>
-            </View>
         </TouchableOpacity>
     )
 }
