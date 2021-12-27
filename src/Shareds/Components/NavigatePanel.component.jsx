@@ -25,7 +25,8 @@ function NavigatePanel({ navigation, routes,  activeRoute}) {
         tmpButton[index].active = true;
         store.dispatch({
             type: "NAVIGATE",
-            btnRoutes: tmpButton
+            btnRoutes: tmpButton,
+            navigation
         });
         navigation.navigate(`${tmpButton[index].route}`);
     }
@@ -44,6 +45,7 @@ const style = StyleSheet.create({
         flexWrap: 'wrap',
         bottom: 1,
         left: 3,
+        backgroundColor: "#fff",
         position: "absolute"
     },
     button: {

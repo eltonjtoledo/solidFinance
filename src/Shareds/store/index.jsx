@@ -1,9 +1,9 @@
 import { createStore } from 'redux'
 import ACTIVITIES from '../../Activities/store';
-import {useRoute} from '@react-navigation/native';
 
 const NAVIGATE = {
     activeRoute: {},
+    showPanel: false,
     navigation: {},
     routes: [{ active: true, name: "Home", route: "Home", icon: { name: "home", size: 32 } },
     { active: false, name: "Carteira", route: "Wallet", icon: { name: "account-balance-wallet", size: 32 } },
@@ -20,11 +20,10 @@ const INITIAL_STATE = {
 function finance(state = INITIAL_STATE, action) {
     switch (action.type) {
         case "NAVIGATE":
-            state = {...state, routes: action.btnRoutes}
+            state = {...state,  routes: (action.btnRoutes.length >=1 ? action.btnRoutes : state.routes ), navigation: action.navigation}
             break;
-        case "SET_NAVIGATION":
-            const routes = useRoute();
-            state = {...state, navigation: action.navigation}
+        case "SHOW_PANEL": 
+            state = {... state, showPanel: action.showPanel}
             break;
     }
 

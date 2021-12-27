@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { Keyboard, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements'
+import { connect } from 'react-redux';
 import store from '../Shareds/store';
 import { colorsDefault, styleGlobal, viewport } from '../Shareds/Styles/index';
 
-export default function Login({ navigation }) {
-    store.dispatch({type: "SET_NAVIGATION", navigation}); 
+function Login({ navigation }) {
     const [keyboardShow, setKeyboardShow] = useState(false)
-
     useEffect(() => {
+        store.dispatch({type: "SHOW_PANEL", showPanel: false}); 
         Keyboard.addListener("keyboardDidShow", () => {
           setKeyboardShow(true);
         });
@@ -29,7 +29,7 @@ export default function Login({ navigation }) {
                 }} source={require("../../assets/logo.png")} />
                 <TextInput returnKeyType={"next"} style={styleGlobal.inputText} name="Username" placeholder="Enter your name or E-mail"/>    
                 <TextInput style={styleGlobal.inputText} name="password" placeholder="Digite o usuário"/>    
-                <TouchableOpacity style={styleGlobal.buttonDefault} onPress={()=>{navigation.navigate('Home')}}>
+                <TouchableOpacity style={styleGlobal.buttonDefault} onPress={()=>{store.dispatch({type: "NAVIGATE", btnRoutes: [], navigation}); navigation.navigate('Home')}}>
                     <Text style={styleGlobal.buttonText}>Login</Text>
                 </TouchableOpacity>
             </View>
@@ -46,3 +46,7 @@ export default function Login({ navigation }) {
         </View>
     )
 }
+
+export default connect(state => ({
+    showPanel: state.showPanel
+}))(Login)
