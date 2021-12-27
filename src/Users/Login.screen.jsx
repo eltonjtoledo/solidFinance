@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import { Keyboard, Image, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { Icon } from 'react-native-elements'
-import { colorsDefault, styleGlobal, viewport } from '../globals/styleGlobal';
+import store from '../Shareds/store';
+import { colorsDefault, styleGlobal, viewport } from '../Shareds/Styles/index';
 
 export default function Login({ navigation }) {
-
+    store.dispatch({type: "SET_NAVIGATION", navigation}); 
     const [keyboardShow, setKeyboardShow] = useState(false)
 
     useEffect(() => {

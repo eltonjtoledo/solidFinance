@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
-import { colorsDefault, styleGlobal, viewport } from "../globals/styleGlobal";
+import { colorsDefault, styleGlobal, viewport } from "../../Shareds/Styles";
 
 export default function Balance() {
     return (

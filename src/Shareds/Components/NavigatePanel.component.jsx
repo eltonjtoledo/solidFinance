@@ -1,32 +1,33 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { colorsDefault, styleGlobal, viewport } from "../globals/styleGlobal";
+import { colorsDefault, styleGlobal, viewport } from "../Styles";
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { connect } from "react-redux";
+import store from '../store/index'
 
-export default function NavigatePanel({ navigation, route }) {
-    const [btnNavivate, setBtnNavivate] = useState([{ active: true, name: "Home", route: "Home", icon: { name: "home", size: 32} },
-    { active: false, name: "Carteira", route: "Wallet", icon: { name: "account-balance-wallet", size: 32} },
-    { active: false, name: "Usuário", route: "users", icon: { name: "people", size: 32}},
-    { active: false, name: "Configuração", route: "Settings", icon: { name: "settings", size: 32} }]);
+function NavigatePanel({ navigation, routes,  activeRoute}) {
     return (
         <View style={style.panel}>
-            {btnNavivate.map((button, index) => {
+            {routes.map((button, index) => {
                 return (<TouchableOpacity style={style.button} key={index} onPress={() => selectRoute(index)}>
                     <Icon {...button.icon} color={button.active == true ? colorsDefault.secundary : colorsDefault.primary} />
-                    <Text style={{fontWeight: "900", display: button.active == true ? "flex" : "none"}}>{button.name}</Text>
+                    <Text style={{ fontWeight: "900", display: button.active == true ? "flex" : "none", color: button.active == true ? colorsDefault.secundary : colorsDefault.primary, fontSize: 12 }}>{button.name}</Text>
                 </TouchableOpacity>);
             })}
         </View>
     );
 
     function selectRoute(index) {
-        let tmpButton = btnNavivate.map(item => {
+        let tmpButton = routes.map(item => {
             item.active = false
             return item;
         });
         tmpButton[index].active = true;
+        store.dispatch({
+            type: "NAVIGATE",
+            btnRoutes: tmpButton
+        });
         navigation.navigate(`${tmpButton[index].route}`);
-        setBtnNavivate([...tmpButton]);
     }
 }
 
@@ -52,4 +53,8 @@ const style = StyleSheet.create({
         padding: 10,
         margin: 2
     },
-})
+});
+
+export default connect(state => ({
+    routes: state.routes, activeRoute: state.activeRoute, navigation: state.navigation
+}))(NavigatePanel);

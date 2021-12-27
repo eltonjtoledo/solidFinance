@@ -1,10 +1,12 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import Index from "./app/index.jsx";
+import Index from "./src/index.jsx";
+import { Provider } from 'react-redux';
+import store from './src/Shareds/store';
 const App = () => {
   return (
+    <Provider store={store}>
       <Index />
+    </Provider>
   );
 };
 export default App;

@@ -1,9 +1,8 @@
 import React from "react";
 import { TouchableOpacity } from "react-native";
-import { TouchableHighlight } from "react-native";
 import { StyleSheet, Text, View } from "react-native";
 import { Icon } from 'react-native-elements';
-import { colorsDefault, viewport } from "../globals/styleGlobal";
+import { colorsDefault, viewport } from "../../Shareds/Styles";
 
 export default function QuickButton({ title, selected, iconName, onPress}) {
     const style = StyleSheet.create({
@@ -14,7 +13,7 @@ export default function QuickButton({ title, selected, iconName, onPress}) {
             backgroundColor: selected ? colorsDefault.secundary : "#fff",
             justifyContent: "center",
             flexDirection: "column",
-            alignItems: "center"
+            alignItems: "center",
         },
         QuickButton_title: {
             color: !selected ? colorsDefault.secundary : "#fff",
@@ -24,7 +23,7 @@ export default function QuickButton({ title, selected, iconName, onPress}) {
     });
 
     return (
-        <TouchableOpacity style={style.QuickButton} onPress={onPress}>
+        <TouchableOpacity style={[style.QuickButton, {elevation: selected ? 6 : 2}]} onPress={onPress}>
             <Icon type="MaterialIcons" name={iconName} color={!selected ? colorsDefault.secundary : "#fff"} size={30} />
             <Text style={style.QuickButton_title}>{title || 'teste'}</Text>
         </TouchableOpacity>

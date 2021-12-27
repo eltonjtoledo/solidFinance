@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, Animated, ScrollView, TouchableOpacity } from "react-native";
-import { colorsDefault, viewport } from "../globals/styleGlobal";
+import { colorsDefault, viewport } from "../../Shareds/Styles";
 import QuickButton from "./QuickButton.component";
 import Icon from 'react-native-vector-icons/Feather';
 
@@ -20,7 +20,7 @@ const QuickButtonCotainer = ()=> {
 
     return (
         <View style={style.containerQuickButtons}>
-            <ScrollView style={{flex: 1, marginRight: 5, overflow: "hidden"}} horizontal={true} bounces={true}>
+            <ScrollView style={{flex: 1, marginRight: 5, overflow: "hidden"}} horizontal={true} bounces={true} showsHorizontalScrollIndicator={false}>
             {QuickButtonList.map((item, i)=>{
                 return <QuickButton key={i} onPress={() => activeQuickButtons(i)} title={`${item.name}`} selected={item.active} iconName={item.icon} />
             })}
@@ -37,9 +37,9 @@ const style = StyleSheet.create({
         height: viewport.height * 0.16,
         padding: 7,
         flexDirection: "row",
-        backgroundColor: "#eee",
         alignItems: "stretch",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
+        overflow:"visible"
     },
     quickButtonMore: {
         flex: 1,
@@ -49,9 +49,8 @@ const style = StyleSheet.create({
         borderRadius: 5,
         backgroundColor: "#fff",
         borderRadius: 8,
-        borderWidth: 3,
-        borderColor: "#ddd",
-        marginLeft: -10
+        marginLeft: -2,
+        elevation: 2
     }
 })
 
