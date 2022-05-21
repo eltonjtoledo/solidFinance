@@ -8,24 +8,21 @@ import store from '../../Shareds/store';
 import ActivityItem from './ActivityItem.component';
 
 const colorScheme = Appearance.getColorScheme();
-function ActivityList({activities}) {
-    const createHeader = (showMore, search, filter) => {
-        const itens = [];
-        if (showMore) itens.push(<TouchableOpacity key={"more-" + Math.random}><Text style={style.activityMore}>View All</Text></TouchableOpacity>);
-        if (search) itens.push(<TouchableOpacity key={"search-" + Math.random}><Icon name="search" size={32} /></TouchableOpacity>)
-        return itens;
-    }
+function ActivityList({activities, showMore, navigation, titleSize}) {
+
+const navigateToActivities = ()=>{
+    navigation.navigate('Activities')
+}
     return (
         <>
             <View style={style.headerTitle}>
-                <Text style={style.activityTitle}>Last Activities</Text>
-                {createHeader(true, false, true)}
+                <Text style={{...style.activityTitle,fontSize: titleSize}}>Last Activities</Text>
+                <TouchableOpacity style={{display: showMore == true ? "flex": "none"}} onPress={navigateToActivities} key={"more-" + Math.random}><Text style={style.activityMore}>View All</Text></TouchableOpacity>
             </View>
-
             <View style={style.activityList}>
                 <ScrollView>
                     {
-                        activities.map((activity, index)=>  <ActivityItem {...activity} key={`Activity${index}`} />)
+                       activities.map((activity, index)=>  <ActivityItem {...activity} key={`Activity${index}`} />)
                     }
                 </ScrollView>
             </View>
@@ -39,7 +36,6 @@ export default connect(state => ({
 
 const style = StyleSheet.create({
     activityTitle: {
-        fontSize: 22,
         fontStyle: "italic",
         fontWeight: "300",
         paddingLeft: 25,
@@ -60,7 +56,6 @@ const style = StyleSheet.create({
     },
     activityList: {
         flex: 1,
-        maxHeight: viewport.height * 0.32,
         overflow: 'scroll',
         flexDirection: "column"
     }

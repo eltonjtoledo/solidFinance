@@ -41,12 +41,12 @@ const style = StyleSheet.create({
         paddingLeft: 30,
         borderTopLeftRadius: 40,
         width: viewport.width + 2,
-        height: viewport.height / 9,
+        maxHeight: viewport.height / 9,
         flexWrap: 'wrap',
         bottom: 1,
         left: 3,
         backgroundColor: "#fff",
-        position: "absolute"
+        position: "relative"
     },
     button: {
         position: "relative",

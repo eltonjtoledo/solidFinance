@@ -5,16 +5,17 @@ import QuickButtonCotainer from './Activities/Components/QuickButtonContainer.co
 import ActivityList from "./Activities/Components/ActivityList.component";
 import store from "./Shareds/store";
 
-export default function HomeScreen({navigation, route}) {
-    
+export default function HomeScreen({ navigation, route }) {
+
     useEffect(() => {
-        store.dispatch({type: "SHOW_PANEL", showPanel: true}); 
-    }, [])
+        store.dispatch({ type: "SHOW_PANEL", showPanel: true });
+    }, []);
+
     return (
-        <View style={{flex: 1, backgroundColor: "#fff"}}>
+        <View style={{ flex: 1, backgroundColor: "#fff" }}>
             <Balance />
             <QuickButtonCotainer />
-            <ActivityList />
+            <ActivityList showMore={true} titleSize={20} navigation={navigation} />
         </View>
     )
 }

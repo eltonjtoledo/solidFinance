@@ -29,7 +29,7 @@ const style = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         backgroundColor: '#fff',
-        elevation: 6,
+        shadowColor: '#003',
         marginVertical: 3
     },
     iconContainer: {
