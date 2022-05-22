@@ -11,7 +11,7 @@ export default function Index({navigation, route}) {
     store.dispatch({type: "SHOW_PANEL", showPanel: true}); 
 }, [])
   return (
-      <SafeAreaView style={{flex: 1}}>
+      <SafeAreaView style={{flex: 1, backgroundColor: "#fff"}}>
           <TopBar navigation={navigation} title="Activity" />
           <ActivityHeader />
           <ActivityList titleSize={16} navigation={navigation} />

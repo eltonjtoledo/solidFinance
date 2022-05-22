@@ -5,15 +5,17 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { connect } from "react-redux";
 import store from '../store/index'
 
-function NavigatePanel({ navigation, routes,  activeRoute}) {
+function NavigatePanel({ navigation, routes, activeRoute }) {
     return (
-        <View style={style.panel}>
-            {routes.map((button, index) => {
-                return (<TouchableOpacity style={style.button} key={index} onPress={() => selectRoute(index)}>
-                    <Icon {...button.icon} color={button.active == true ? colorsDefault.secundary : colorsDefault.primary} />
-                    <Text style={{ fontWeight: "900", display: button.active == true ? "flex" : "none", color: button.active == true ? colorsDefault.secundary : colorsDefault.primary, fontSize: 12 }}>{button.name}</Text>
-                </TouchableOpacity>);
-            })}
+        <View style={{position: "relative", bottom: 1, left: 3, width: viewport.width + 2, backgroundColor: "#fff", flex: 1, maxHeight: viewport.height / 9,}}>
+            <View  style={style.panel}>
+                {routes.map((button, index) => {
+                    return (<TouchableOpacity style={style.button} key={index} onPress={() => selectRoute(index)}>
+                        <Icon {...button.icon} color={button.active == true ? colorsDefault.secundary : colorsDefault.primary} />
+                        <Text style={{ fontWeight: "900", display: button.active == true ? "flex" : "none", color: button.active == true ? colorsDefault.secundary : colorsDefault.primary, fontSize: 12 }}>{button.name}</Text>
+                    </TouchableOpacity>);
+                })}
+            </View>
         </View>
     );
 
@@ -35,18 +37,14 @@ function NavigatePanel({ navigation, routes,  activeRoute}) {
 const style = StyleSheet.create({
     panel: {
         ...styleGlobal.content,
-        elevation: 4,
+        elevation: 3,
         alignItems: 'flex-end',
         justifyContent: 'center',
         paddingLeft: 30,
         borderTopLeftRadius: 40,
-        width: viewport.width + 2,
-        maxHeight: viewport.height / 9,
+        width: viewport.width,
         flexWrap: 'wrap',
-        bottom: 1,
-        left: 3,
-        backgroundColor: "#fff",
-        position: "relative"
+        left: -1
     },
     button: {
         position: "relative",
